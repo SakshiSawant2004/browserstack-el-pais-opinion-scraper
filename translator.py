@@ -1,30 +1,16 @@
-import requests
+from deep_translator import GoogleTranslator
 
 def translate_titles(articles):
 
     translated_headers = []
 
-    url = "https://rapid-translate-multi-traduction.p.rapidapi.com/t"
-
-    headers = {
-        "content-type": "application/json",
-        "X-RapidAPI-Host": "rapid-translate-multi-traduction.p.rapidapi.com",
-        "X-RapidAPI-Key": "824f6aa3f5msh8b867de2629129ap1fd87bjsn6ee979d7bfde"
-    }
-
     for article in articles:
 
-        payload = {
-            "from": "es",
-            "to": "en",
-            "q": article["title"]
-        }
+        translated = GoogleTranslator(source='es', target='en').translate(
+            article["title"]
+        )
 
-        response = requests.post(url, json=payload, headers=headers)
-
-        data = response.json()
-
-        # ✅ Fix — list response handle karo
-        translated_headers.append(data[0])
+        translated_headers.append(translated)
 
     return translated_headers
+

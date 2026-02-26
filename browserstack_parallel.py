@@ -1,4 +1,5 @@
 import threading
+import time
 from selenium import webdriver
 from src.browserstack_config import BROWSERSTACK_URL
 
@@ -12,6 +13,9 @@ def run_browser_test():
     )
 
     driver.get("https://elpais.com")
+
+    # Page load wait ⭐
+    time.sleep(3)
 
     print("Browser Title:", driver.title)
 
